@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "product_variants")
@@ -34,6 +32,9 @@ public class ProductVariant {
 
     @OneToMany(mappedBy = "productVariant")
     private Set<VariantAttributeValues> variantAttributeValues = new HashSet<>();
+
+    @OneToMany(mappedBy = "productVariant")
+    private List<OrderItem> orderItemList = new ArrayList<>();
 
     public ProductVariant() {
     }
@@ -119,6 +120,14 @@ public class ProductVariant {
 
     public void setVariantAttributeValues(Set<VariantAttributeValues> variantAttributeValues) {
         this.variantAttributeValues = variantAttributeValues;
+    }
+
+    public List<OrderItem> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
     }
 
     @Override

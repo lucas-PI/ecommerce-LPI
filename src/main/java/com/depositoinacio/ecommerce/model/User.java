@@ -4,6 +4,8 @@ import com.depositoinacio.ecommerce.model.enums.TipoUser;
 import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +29,8 @@ public class User {
     private Boolean active;
     @Column(name = "created_at", updatable = false)
     private OffsetDateTime createdAt;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 
     public User(){
         
@@ -96,6 +100,14 @@ public class User {
 
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
